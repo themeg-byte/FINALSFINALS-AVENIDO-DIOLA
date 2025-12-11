@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Number System Conversion</title>
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+
+    /* BACKGROUND IMAGE*/
+    background: url("6767.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container {
+    background: #ffffff;
+    width: 480px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+    animation: fadeIn 0.7s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  h1 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+    color: #2d2d2d;
+  }
+
+  /*  LAYOUT */
+  .row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 17px;
+  }
+
+  select, input {
+    width: 48%;
+    padding: 12px;
+    font-size: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: 2px solid #c9d5ff;
+    outline: none;
+    transition: 0.2s;
+  }
+
+  select:focus, input:focus {
+    border-color: #1a73e8;
+  }
+
+  button {
+    width: 70%;
+    padding: 13px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 15px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  #convertBtn {
+    background: #1a73e8;
+    color: white;
+  }
+
+  #convertBtn:hover {
+    background: #1458b3;
+  }
+
+  #swapBtn {
+    background: #e8e8e8;
+    margin-top: 10px;
+  }
+
+  #swapBtn:hover {
+    background: #d3d3d3;
+  }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+  <h1>NUMBER SYSTEM CONVERSION</h1>
+
+  <!-- 🔹 Row 1: Input type + Output type -->
+  <div class="row">
+    <select id="inputType">
+      <option value="10">DECIMAL</option>
+      <option value="2">BINARY</option>
+      <option value="8">OCTAL</option>
+      <option value="16">HEXADECIMAL</option>
+    </select>
+
+    <select id="outputType">
+      <option value="2">BINARY</option>
+      <option value="10">DECIMAL</option>
+      <option value="8">OCTAL</option>
+      <option value="16">HEXADECIMAL</option>
+    </select>
+  </div>
+
+  <!-- 🔹 Row 2: Input box + Result box -->
+  <div class="row">
+    <input id="inputValue" placeholder="Enter...">
+    <input id="outputValue" readonly placeholder="Result">
+  </div>
+
+  <!-- Buttons -->
+  <button id="convertBtn" onclick="convert()">CONVERT</button>
+  <button id="swapBtn" onclick="swap()">SWAP</button>
+
+</div>
+
+<script>
+  const inputType = document.getElementById("inputType");
+  const outputType = document.getElementById("outputType");
+  const inputValue = document.getElementById("inputValue");
+  const outputValue = document.getElementById("outputValue");
+
+  function convert() {
+    let fromBase = Number(inputType.value);
+    let toBase = Number(outputType.value);
+    let value = inputValue.value;
+
+    let decimalNumber = parseInt(value, fromBase);
+
+    if (isNaN(decimalNumber)) {
+      outputValue.value = "Invalid!";
+      return;
+    }
+
+    outputValue.value = decimalNumber.toString(toBase).toUpperCase();
+  }
+
+  function swap() {
+    let tempIndex = inputType.selectedIndex;
+    inputType.selectedIndex = outputType.selectedIndex;
+    outputType.selectedIndex = tempIndex;
+
+    let tempValue = inputValue.value;
+    inputValue.value = outputValue.value;
+    outputValue.value = tempValue;
+  }
+</script>
+
+</body>
+</html>
